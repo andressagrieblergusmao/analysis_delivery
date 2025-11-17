@@ -1,22 +1,9 @@
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression, HuberRegressor
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import r2_score
 import numpy as np
-
-# Load and preprocess data
-df = pd.read_csv(r"C:\Users\Andressa\Downloads\cardapiofull.csv", delimiter=";")
-df['Distance_Num'] = df['Distance'].apply(parse_distance)
-df['Rider wait time (minutes)'] = pd.to_numeric(df['Rider wait time (minutes)'], errors='coerce')
-
-# Names of restaurants to analyze
-restaurant_list = ['Aura Pizzas', 'Dilli Burguer Adda', 'Swaad', 'Tandoori Junction']
-
-for name in restaurant_list:
-    analyze_restaurant(df, name)
-
 
 def parse_distance(d):
     if pd.isnull(d):
@@ -105,5 +92,18 @@ def analyze_restaurant(df, restaurant_name):
     plt.title(f'{restaurant_name}: Logarithmic Regression')
     plt.legend()
     plt.show()
+
+# Load and preprocess data
+df = pd.read_csv(r"C:\Users\Andressa\Downloads\cardapiofull.csv", delimiter=";")
+df['Distance_Num'] = df['Distance'].apply(parse_distance)
+df['Rider wait time (minutes)'] = pd.to_numeric(df['Rider wait time (minutes)'], errors='coerce')
+
+# Names of restaurants to analyze
+restaurant_list = ['Aura Pizzas', 'Dilli Burguer Adda', 'Swaad', 'Tandoori Junction']
+
+for name in restaurant_list:
+    analyze_restaurant(df, name)
+
+
 
 
